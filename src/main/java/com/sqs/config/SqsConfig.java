@@ -2,6 +2,7 @@ package com.sqs.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +16,12 @@ import com.amazonaws.services.sqs.model.SendMessageResult;
 
 @Configuration
 public class SqsConfig {
+	
+	@Value("${access.id}")
+	private String accessId;
+	
+	@Value("${secret.key}")
+	  private String secretKey;
 
 	/**
 	 * Return SQS client 
@@ -34,7 +41,7 @@ public class SqsConfig {
 	 */
 	@Bean
 	public AWSCredentials amazonAWSCredentials() {
-		return new BasicAWSCredentials("xxxxx", "xxx");
+		return new BasicAWSCredentials(accessId, secretKey);
 	}
 	
 	/**
